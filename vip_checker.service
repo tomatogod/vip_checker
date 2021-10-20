@@ -1,0 +1,19 @@
+[Unit]
+Description=VIP_Checker
+Wants=network-online.target systemd-networkd-wait-online.service
+After=multi-user.target
+StartLimitIntervalSec=60
+
+[Service]
+Type=idle
+Restart=on-failure
+RestartSec=60s
+ExecStart=python3 /etc/vip_checker/vip_checker.py
+User=redis
+Group=redis
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=vip_checker
+
+[Install]
+WantedBy=multi-user.target
