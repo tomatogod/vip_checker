@@ -4,6 +4,7 @@ import time
 import logging
 import logging.handlers
 
+#set up logging for syslog
 logger = logging.getLogger('MyLogger')
 logger.setLevel(logging.DEBUG)
 handler = logging.handlers.SysLogHandler(address = '/dev/log')
