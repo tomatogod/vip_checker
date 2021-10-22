@@ -16,6 +16,7 @@ device = '' #network interface as device name e.g. eth0
 redis_auth_password = '' #redis authentication password to check info replication e.g. Password1
 time_to_sleep = 60 #seconds between checks
 
+#os shell check to see if output of ip addr contains the vip address
 def do_i_have_vip():
     try:
         output = str(subprocess.check_output(('ip addr'), shell=True))
@@ -27,6 +28,7 @@ def do_i_have_vip():
         logger.debug('redis_vip_checker: ',e)
         print('redis_vip_checker: ',e)
 
+#os shell check to see if output of redis info replication contains the role:master string
 def am_i_redis_master():
     try:
         command_string = f'redis-cli -a {redis_auth_password} info replication'
@@ -39,6 +41,7 @@ def am_i_redis_master():
         print('Redis is not responding')
         print(e)
 
+#os shell to add vip as secondary ip
 def add_vip_if_master():
     logger.debug('redis_vip_checker: Attempting to add VIP')
     print('redis_vip_checker: Attempting to add VIP')
@@ -50,6 +53,7 @@ def add_vip_if_master():
     except Exception as e:
         print(e)
 
+#os shell to delete vip as secondary ip
 def delete_vip_if_not_master():
     print('redis_vip_checker: Attempting to delete VIP')
     logger.debug('redis_vip_checker: Attempting to delete VIP')
@@ -62,6 +66,7 @@ def delete_vip_if_not_master():
     except Exception as e:
         print(e)
 
+#start loop for logic checks
 while True:
     logger.debug('redis_vip_checker: Checking for Master and VIP...')
     if am_i_redis_master() and do_i_have_vip():
@@ -81,6 +86,7 @@ while True:
     else:
         logger.debug('redis_vip_checker: error')
         print('error')
+    #pause between loop runs
     logger.debug('redis_vip_checker: sleeping...')
     print('sleeping...')
     time.sleep(time_to_sleep)
