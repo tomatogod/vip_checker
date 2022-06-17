@@ -29,4 +29,5 @@ Suggested Installation Instructions
 -   redis_auth_password = requirepass setting within redis.conf
 -   time_to_sleep = amount of time in seconds between poll of checker.
 - copy vip_checker.service to /etc/systemd/system/
+- edit if required - current setup to utilize the 'redis' user which may or may not already be present in your setup.
 - enable vip_checker service and start
