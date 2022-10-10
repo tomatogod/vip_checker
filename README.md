@@ -17,6 +17,10 @@ PreRequisites:
 - Linux Machine
 - User account with sufficient privedges to install systemd service and add a secondary ip address
 - Redis running on local machine with authentication enabled
+- Within the script we run a 'sudo' command, in order to allow the running user to complete this command you'll need to allow that account within the sudoers file without a password.
+	sudo nano /etc/sudoers
+	edit "# User privilege specification" section and add the following line:
+	redis	ALL=NOPASSWD: ALL
 
 Suggested Installation Instructions
 
