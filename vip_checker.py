@@ -32,7 +32,7 @@ def do_i_have_vip():
 #os shell check to see if output of redis info replication contains the role:master string
 def am_i_redis_master():
     try:
-        command_string = f'redis-cli -a {redis_auth_password} info replication'
+        command_string = f'redis-cli --no-auth-warning -a {redis_auth_password} info replication'
         output = str(subprocess.check_output((command_string), shell=True))
         if output.__contains__('role:master'):
             return True
