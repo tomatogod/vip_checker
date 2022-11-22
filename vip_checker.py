@@ -3,6 +3,7 @@ import subprocess
 import time
 import logging
 import logging.handlers
+import configparser
 
 #set up logging for syslog
 logger = logging.getLogger('MyLogger')
@@ -10,12 +11,16 @@ logger.setLevel(logging.DEBUG)
 handler = logging.handlers.SysLogHandler(address = '/dev/log')
 logger.addHandler(handler)
 
-#Configuration items
-vip = '' #secondary IP address to use a VIP e.g 192.168.1.3
-mask = '' #subnet mask e.g. 24
-device = '' #network interface as device name e.g. eth0
-redis_auth_password = '' #redis authentication password to check info replication e.g. Password1
-time_to_sleep = 60 #seconds between checks
+#set up config reader
+config = configparser.ConfigParser()
+config.read("vip_checker.config")
+
+#configuration items
+vip = config['vip_checker']['vip']
+mask = config['vip_checker']['mask']
+device = config['vip_checker']['device']
+redis_auth_password = config['vip_checker']['redis_auth_password']
+time_to_sleep = config['vip_checker']['time_to_sleep']
 
 #os shell check to see if output of ip addr contains the vip address
 def do_i_have_vip():
