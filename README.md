@@ -24,9 +24,8 @@ PreRequisites:
 
 Suggested Installation Instructions
 
-- make directory /etc/vip_checker/
-- copy vip_checker.py into /etc/vip_checker/
-- edit vip_check.py with editor and configure the 'configuration items' section at the top
+- copy vip_checker.py and vip_checker.config into /etc/redis/
+- edit vip_check.config with editor and configure the 'configuration items'
 -   vip = is the secondary IP address that will act as the Virtual IP Address (VIP)
 -   mask = subnet mask of the vip
 -   device = device name where the secondary ip address should be hosted on
