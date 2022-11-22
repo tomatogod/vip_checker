@@ -46,6 +46,7 @@ def am_i_redis_master():
     except Exception as e:
         print('Redis is not responding')
         print(e)
+        return False
 
 #os shell to add vip as secondary ip
 def add_vip_if_master():
