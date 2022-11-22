@@ -12,8 +12,9 @@ handler = logging.handlers.SysLogHandler(address = '/dev/log')
 logger.addHandler(handler)
 
 #set up config reader
+configpath = os.path.dirname(os.path.realpath(__file__))
 config = configparser.ConfigParser()
-config.read("vip_checker.config")
+config.read(configpath + "/" + "vip_checker.config")
 
 #configuration items
 vip = config['vip_checker']['vip']
@@ -94,6 +95,4 @@ while True:
         logger.debug('redis_vip_checker: error')
         print('error')
     #pause between loop runs
-    logger.debug('redis_vip_checker: sleeping...')
-    print('sleeping...')
     time.sleep(time_to_sleep)
