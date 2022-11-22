@@ -20,7 +20,7 @@ vip = config['vip_checker']['vip']
 mask = config['vip_checker']['mask']
 device = config['vip_checker']['device']
 redis_auth_password = config['vip_checker']['redis_auth_password']
-time_to_sleep = config['vip_checker']['time_to_sleep']
+time_to_sleep = float(config['vip_checker']['time_to_sleep'])
 
 #os shell check to see if output of ip addr contains the vip address
 def do_i_have_vip():
