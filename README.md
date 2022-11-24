@@ -1,4 +1,4 @@
-# vip_checker for a Redis
+# vip_checker for Redis
 Simple check if redis is master of a cluster and that secondary ip (VIP) is present, if not add it. 
 
 
